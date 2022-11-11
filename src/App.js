@@ -27,6 +27,7 @@ function App() {
           <button>눌러</button>
       </form>
       <hr/>
+      <hr></hr>
       {toDos.map((item)=><li>{item}</li>)}
     </div>
   );
