@@ -1,23 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [toDo, setTodo] = useState("");
+  const [toDos, setTodos] = useState([]);
+  const onChangeValue = (e) => {
+    setTodo(e.target.value);
+  }
+  function fnOnSubmit(e) {
+    e.preventDefault();
+    if(toDo === ""){
+      return;
+    }
+    setTodos(function (array) {
+      return [toDo, ...array];
+    })
+
+  }
+  console.log(toDos);
+    return (
+    <div>
+      <h2>할일들({toDos.length})</h2>
+      <form onSubmit={fnOnSubmit}>
+        <input type="text" value={toDo} onChange={onChangeValue} placeholder="여기써"/>
+          <button>눌러</button>
+      </form>
+      <hr/>
+      {toDos.map((item)=><li>{item}</li>)}
     </div>
   );
 }
